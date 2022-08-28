@@ -39,34 +39,9 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Prompt', sans-serif;
   text-decoration: none;
   list-style: none;
   box-sizing: border-box; 
   scroll-behavior: smooth;
-}
-.navbar-container{
-  background-color: #282c34;
-  display: flex;
-  justify-content:space-around;
-  align-items: center;
-  height: 80px;
-  position: sticky;
-  top: 0;
-  border-bottom: 1px solid rgba(92, 92, 92, 0.836);
-}
-.navbar-menu{
-  display: inline-flex;
-  list-style: none;
-  align-items: center;
-}
-.navbar-link a{
-  padding: 20px;
-  color: whitesmoke;
-  font-size: 18px;
-}
-.navbar-link a:hover {
-  color: #61dafb;
-}
-.navbar-logo {
-  width: 150px;
 }
