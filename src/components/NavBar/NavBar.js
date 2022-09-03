@@ -1,4 +1,3 @@
-import React from "react";
 import logo from '../../img/seinfeldlogo.png';
 import CartWidget from "../CartWidget/CartWidget";
 import './NavBarStyles.css';
