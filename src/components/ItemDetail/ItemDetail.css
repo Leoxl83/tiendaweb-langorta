@@ -1,0 +1,15 @@
+.funkoCardDetail {
+    width: 300px;
+    margin: 35px;
+    background-color: #b8b8b8;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    color: black;
+
+}
+.funkoCardDetail_img {
+    width: 250px;
+    border-radius: 10px;
+    
+}

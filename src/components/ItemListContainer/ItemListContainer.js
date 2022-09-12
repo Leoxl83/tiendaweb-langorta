@@ -2,7 +2,6 @@ import data from "../Data/Data";
 import { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 
-
 const ItemListContainer = ({greeting}) => {
 
   const [productList, setProductList] = useState([])
@@ -15,13 +14,11 @@ const ItemListContainer = ({greeting}) => {
   })
 
   const getProducts = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(data)
-      }, 2000)
-
+    setTimeout(() => {
+      resolve(data)
+    }, 2000)
   });
   
-
   return (
     <>
       <h1>{greeting}</h1>

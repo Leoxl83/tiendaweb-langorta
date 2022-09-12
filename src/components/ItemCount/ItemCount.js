@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import './ItemCount.css';
+
 
 const ItemCount = (props) => {
 
@@ -10,9 +12,9 @@ const ItemCount = (props) => {
     <>
       <div>Stock {props.stock}</div>
       <div>
-        <button onClick={quitar}>-</button> 
+        <button className='btnCount' onClick={quitar}>-</button> 
         <span>{items}</span>       
-        <button onClick={agregar}>+</button>
+        <button className='btnCount' onClick={agregar}>+</button>
       </div>     
       <button onClick={()=>{console.log(`Agregaste ${items} productos al carrito`)}}>Agregar al carrito</button>
     </>  

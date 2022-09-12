@@ -10,6 +10,6 @@ const Item = ({name, price, image}) => {
         <ItemCount initial={1} stock={5}/>
     </div>
   )
-  
 }
+
 export default Item
