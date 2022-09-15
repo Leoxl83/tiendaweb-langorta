@@ -1,17 +1,22 @@
 import logo from '../../img/seinfeldlogo.png';
 import CartWidget from "../CartWidget/CartWidget";
 import './NavBarStyles.css';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
   return (
     <nav className="navbar-container">
-      <a href="/">
-        <img src={logo} className="navbar-logo" alt="logo" />
-      </a>
+      <NavLink to="/">
+        <img src={logo} className="navbar-logo" alt="SeinfeldShop Logo"/>
+      </NavLink>
 
       <ul className="navbar-menu">
-        <li className="navbar-link"><a href="/">Productos</a></li>
-        <li className="navbar-link"><a href="/">Nosotros</a> </li>
+        <li >
+          <NavLink to="/category/Funkopop" className="navbar-link" 
+            style={({isActive}) => isActive ? {color: "#FBCA1F"} : {color: "whitesmoke"}}>FunkoPops!</NavLink>
+          <NavLink to="/category/Taza" className="navbar-link" 
+            style={({isActive}) => isActive ? {color: "#FBCA1F"} : {color: "whitesmoke"}}>Tazas</NavLink> 
+        </li>
       </ul>
       <CartWidget/>
     </nav>

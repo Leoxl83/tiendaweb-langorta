@@ -1,27 +1,28 @@
-import data from "../Data/Data";
+import data from "../../Data/Data";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ItemList from "../ItemList/ItemList";
+import ItemList from "../../ItemList/ItemList";
 
-const ItemListContainer = ({greeting}) => {
+const ItemListContainer = () => {
 
+  const { category } = useParams();
   const [productList, setProductList] = useState([])
 
   useEffect(() => {
     getProducts.then((response) => {
-      setProductList(response);
+      category ? setProductList(response.filter((item) => item.category === category)): setProductList(response);
     })
     .catch (error => console.log(error))
-  })
+  });
 
   const getProducts = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data)
-    }, 2000)
+    }, 1000)
   });
   
   return (
     <>
-      <h1>{greeting}</h1>
       <ItemList lista={productList} />
     </>
   )

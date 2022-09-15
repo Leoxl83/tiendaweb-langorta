@@ -1,15 +1,32 @@
-.funkoCardDetail {
-    width: 300px;
-    margin: 35px;
+.detail {
+    min-height: 100vh;
     background-color: #b8b8b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cardDetail {
+    display: flex;
+    border: black 3px solid;
+    border-radius: 10px;
+    width: 500px;
+    background-color:darkgrey
+}
+.cardDetailLeft {
     border-radius: 10px;
     text-align: center;
-    padding: 20px;
+    padding: 15px;
     color: black;
+}
+.cardDetailRight {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    margin:  auto;
 
 }
-.funkoCardDetail_img {
+.card_img {
     width: 250px;
-    border-radius: 10px;
-    
+    border-radius: 10px;    
 }
