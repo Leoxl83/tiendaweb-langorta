@@ -131,7 +131,14 @@ const data = [
     image: "/images/taza/tazageorge.jpg",
     price: "U$S 10",
     category: "Taza",
-  }
+  },
+  {
+    id: "20",
+    name: "Taza George",
+    image: "/images/taza/tazacantstandya.jpg",
+    price: "U$S 10",
+    category: "Taza",
+  }  
 ]
 
 export default data;
