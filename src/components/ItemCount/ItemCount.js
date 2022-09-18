@@ -1,22 +1,18 @@
-import React, {useState} from 'react';
 import './ItemCount.css';
 
+const ItemCount = ({setCount, count}) => {
 
-const ItemCount = (props) => {
-
-  const [items, setItems] = useState(0);
-
-  const agregar = () => items < props.stock ? setItems(items + 1) : alert("Alcanzo el maximo de productos");
-  const quitar = () => items > 0 ? setItems(items - 1) : alert("Ya no tiene productos");
+  const stock = 5;
+  const agregar = () => count < stock ? setCount(count +1) : alert("Alcanzo el maximo de productos");
+  const quitar = () => count > 0 ? setCount(count -1) : alert("Ya no tiene productos");
   return (
     <>
-      <div>Stock {props.stock}</div>
+      <div>Stock {stock}</div>
       <div>
         <button className='btnCount' onClick={quitar}>-</button> 
-        <span>{items}</span>       
+        <span>{count}</span>       
         <button className='btnCount' onClick={agregar}>+</button>
       </div>     
-      <button onClick={()=>{console.log(`Agregaste ${items} productos al carrito`)}}>Agregar al carrito</button>
     </>  
   );
 }

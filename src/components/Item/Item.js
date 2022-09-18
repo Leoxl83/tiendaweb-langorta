@@ -6,7 +6,6 @@ const Item = ({name, price, image}) => {
         <img width={`150px`}  src={image} alt = {name}/>
         <h2>{name}</h2>
         <h4>{price}</h4>
-        <button>Mas Info</button>
     </div>
   )
 }
