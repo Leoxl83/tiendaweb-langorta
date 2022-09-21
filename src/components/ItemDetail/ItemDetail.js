@@ -1,11 +1,17 @@
 import ItemCount from "../ItemCount/ItemCount";
-import {useState} from 'react';
 import './ItemDetail.css';
 import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { CartContext } from "../../context/CartContext";
 
 const ItemDetail = ({item}) => {
 
-  const [count, setCount] = useState(0);
+  const {addToCart} = useContext(CartContext);
+  const [count, setCount] = useState(1);
+
+  function onAdd (item) {
+    addToCart(item, count);
+  }
 
   const finalizar = () => {
     console.log (count);
@@ -16,14 +22,14 @@ const ItemDetail = ({item}) => {
       <div className="cardDetail">
         <section className="cardDetailLeft">
           <img className="card_img" src={item.image} alt = {item.name}/>
+          <Link to='/'>Volver</Link>
         </section>
         <section className= "cardDetailRight">
           <h2>{item.name}</h2>
           <h4>{item.price}</h4>
           <ItemCount setCount={setCount} count={count}/>
-          <button onClick={()=>{console.log(`Agregaste ${count} productos al carrito`)}}>Agregar al carrito</button>
-
-          <Link to={'/cart'}> <button onClick={finalizar} >Finalizar mi compra</button></Link>
+          <button onClick={()=> onAdd(item) }>Agregar al carrito</button>
+          <Link to={'/cart'}> <button className="btnFinalizar" onClick={finalizar} >Finalizar mi compra</button></Link>
         </section>        
       </div>            
     </div>

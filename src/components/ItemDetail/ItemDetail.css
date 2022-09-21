@@ -1,6 +1,5 @@
 .detail {
     min-height: 100vh;
-    background-color: #b8b8b8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,8 +8,7 @@
     display: flex;
     border: black 3px solid;
     border-radius: 10px;
-    width: 500px;
-    background-color:darkgrey
+    width: 600px;
 }
 .cardDetailLeft {
     border-radius: 10px;
@@ -29,4 +27,26 @@
 .card_img {
     width: 250px;
     border-radius: 10px;    
+}
+
+.btnFinalizar {
+    background: #61d3ec;
+    font-weight: 900;
+    padding: 5px;
+    font-size: 14px;
+    border: 2px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    cursor: pointer;
+    margin-top: 25px;
+}
+   
+.btnFinalizar:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+}
+   
+.btnFinalizar:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
 }

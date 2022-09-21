@@ -13,15 +13,14 @@ const NavBar = () => {
       <ul className="navbar-menu">
         <li >
           <NavLink to="/category/Funkopop" className="navbar-link" 
-            style={({isActive}) => isActive ? {color: "#FBCA1F"} : {color: "whitesmoke"}}>FunkoPops!</NavLink>
+            style={({isActive}) => isActive ? {color: "rgb(184, 20, 20)", fontWeight:"bold"} : {color: "black"}}>FunkoPops!</NavLink>
           <NavLink to="/category/Taza" className="navbar-link" 
-            style={({isActive}) => isActive ? {color: "#FBCA1F"} : {color: "whitesmoke"}}>Tazas</NavLink> 
+            style={({isActive}) => isActive ? {color: "rgb(184, 20, 20)", fontWeight:"bold"} : {color: "black"}}>Tazas</NavLink> 
         </li>
       </ul>
       <CartWidget/>
     </nav>
   )
-
 }
 
 export default NavBar;

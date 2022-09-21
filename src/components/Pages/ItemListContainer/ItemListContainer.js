@@ -6,16 +6,16 @@ import ItemList from "../../ItemList/ItemList";
 const ItemListContainer = () => {
 
   const { category } = useParams();
-  const [productList, setProductList] = useState([])
+  const [itemList, setItemList] = useState([])
 
   useEffect(() => {
-    getProducts.then((response) => {
-      category ? setProductList(response.filter((item) => item.category === category)): setProductList(response);
+    getItems.then((response) => {
+      category ? setItemList(response.filter((item) => item.category === category)): setItemList(response);
     })
     .catch (error => console.log(error))
   });
 
-  const getProducts = new Promise((resolve, reject) => {
+  const getItems = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data)
     }, 1000)
@@ -23,7 +23,7 @@ const ItemListContainer = () => {
   
   return (
     <>
-      <ItemList lista={productList} />
+      <ItemList lista={itemList} />
     </>
   )
 }

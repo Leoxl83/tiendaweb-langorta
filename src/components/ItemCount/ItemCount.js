@@ -4,7 +4,7 @@ const ItemCount = ({setCount, count}) => {
 
   const stock = 5;
   const agregar = () => count < stock ? setCount(count +1) : alert("Alcanzo el maximo de productos");
-  const quitar = () => count > 0 ? setCount(count -1) : alert("Ya no tiene productos");
+  const quitar = () => count > 1 ? setCount(count -1) : alert("Tenes el minimo de productos");
   return (
     <>
       <div>Stock {stock}</div>

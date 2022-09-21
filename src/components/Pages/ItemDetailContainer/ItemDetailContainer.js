@@ -6,14 +6,14 @@ import ItemDetail from "../../ItemDetail/ItemDetail";
 const ItemDetailContainer = () => {
 
   const {id} = useParams();
-  const [productDetail, setProductDetail] = useState([]);
+  const [itemDetail, setProductDetail] = useState([]);
 
   useEffect(() => {
     getItem.then((response) => {
-      const dataFiltrada = response.filter((product) => product.id === id);
+      const dataFiltrada = response.filter((item) => item.id === id);
       setProductDetail(...dataFiltrada);
-  })
-},)
+    })
+  },)
 
   const getItem = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -22,7 +22,7 @@ const ItemDetailContainer = () => {
   });
 
   return (
-    <ItemDetail item={productDetail} />    
+    <ItemDetail item={itemDetail} />    
   )
 }
 

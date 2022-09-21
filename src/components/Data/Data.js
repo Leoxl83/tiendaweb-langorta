@@ -106,14 +106,14 @@ const data = [
   },
   {
     id: "16",
-    name: "Taza No Soup for you!",
+    name: "No Soup for you!",
     image: "/images/taza/tazanazisoup.jpg",
     price: "U$S 10",
     category: "Taza",
   },
   {
     id: "17",
-    name: "Taza Kramer",
+    name: "Feeling good...",
     image: "/images/taza/tazakramer.jpg",
     price: "U$S 10",
     category: "Taza",
@@ -127,14 +127,14 @@ const data = [
   },
   {
     id: "19",
-    name: "Taza George",
+    name: "It's not a lie",
     image: "/images/taza/tazageorge.jpg",
     price: "U$S 10",
     category: "Taza",
   },
   {
     id: "20",
-    name: "Taza George",
+    name: "Can't stand ya",
     image: "/images/taza/tazacantstandya.jpg",
     price: "U$S 10",
     category: "Taza",
