@@ -1,12 +1,19 @@
-import cart from '../../img/cart.png';
 import './CartWidgetStyles.css';
+import { TiShoppingCart  } from "react-icons/ti";
+import { useContext } from 'react';
+import { CartContext} from '../../context/CartContext';
 
 const CartWidget = () => {
+
+  const {cart} = useContext(CartContext);
+  
   return (
-    <a href='/'>
-      <img src={cart} className="cart" alt="cart" />
-    </a>
+    <>
+      <TiShoppingCart className='carritoIcon' />
+      <span className='carritoTotal'>{cart.reduce((acc,cartItem)=> acc + cartItem.quantity, 0)}</span>
+    </>    
   )
 }
 
 export default CartWidget
+

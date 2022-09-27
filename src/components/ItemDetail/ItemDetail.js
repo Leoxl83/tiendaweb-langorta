@@ -1,5 +1,5 @@
-import ItemCount from "../ItemCount/ItemCount";
 import './ItemDetail.css';
+import ItemCount from "../ItemCount/ItemCount";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
@@ -26,7 +26,7 @@ const ItemDetail = ({item}) => {
         </section>
         <section className= "cardDetailRight">
           <h2>{item.name}</h2>
-          <h4>{item.price}</h4>
+          <h4>U$S {item.price}</h4>
           <ItemCount setCount={setCount} count={count}/>
           <button onClick={()=> onAdd(item) }>Agregar al carrito</button>
           <Link to={'/cart'}> <button className="btnFinalizar" onClick={finalizar} >Finalizar mi compra</button></Link>

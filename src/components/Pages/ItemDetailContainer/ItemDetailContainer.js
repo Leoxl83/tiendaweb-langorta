@@ -15,10 +15,10 @@ const ItemDetailContainer = () => {
     })
   },)
 
-  const getItem = new Promise((resolve, reject) => {
-    setTimeout(() => {
+  const getItem = new Promise((resolve,reject) => {
+    // setTimeout(() => {
       resolve(data)
-    }, 1000)
+    // }, 1000)
   });
 
   return (

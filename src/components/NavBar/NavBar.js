@@ -18,7 +18,9 @@ const NavBar = () => {
             style={({isActive}) => isActive ? {color: "rgb(184, 20, 20)", fontWeight:"bold"} : {color: "black"}}>Tazas</NavLink> 
         </li>
       </ul>
-      <CartWidget/>
+      <NavLink to={"/cart"}>
+        <CartWidget/>
+      </NavLink>
     </nav>
   )
 }
