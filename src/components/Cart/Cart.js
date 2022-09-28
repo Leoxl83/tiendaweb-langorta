@@ -25,13 +25,16 @@ const Cart = () => {
                            <h3>{item.name}</h3>
                         </section>
                         <section>
-                           <h5>Precio: U$S {item.price}</h5>
+                           <h4>Precio: </h4>
+                           <h5>U$S {item.price}</h5>
                         </section> 
                         <section>
-                           <h5>Cantidad: {item.quantity}</h5>
+                           <h4>Cantidad: </h4>
+                           <h5>{item.quantity}</h5>
                         </section>
                         <section>
-                           <h5>Total: U$S {item.price * item.quantity}</h5>
+                           <h4>Total: </h4>
+                           <h5>U$S {item.price * item.quantity}</h5>
                         </section>                       
                         <button onClick={() => removeItem(item.id)}>Eliminar producto</button>
                      </>
