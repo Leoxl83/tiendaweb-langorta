@@ -1,11 +1,12 @@
+const rutaImagen = '../images/';
 
 const Item = ({name, price, image}) => {
 
   return (
     <div className='Card'>
-        <img width={`200px`}  src={image} alt = {name}/>
+        <img width={`200px`}  src={rutaImagen + image} alt = {name}/>
         <h2>{name}</h2>
-        <h4>U$S{price}</h4>
+        <h4>U$S {price}</h4>
     </div>
   )
 }
