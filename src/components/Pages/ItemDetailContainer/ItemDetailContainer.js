@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ItemDetail from "../../ItemDetail/ItemDetail";
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
+
 const ItemDetailContainer = () => {
 
   const { id } = useParams();
@@ -17,8 +18,7 @@ const ItemDetailContainer = () => {
     })
     .catch((err) => console.log(err));
   
-  return <>{itemDetail && <ItemDetail item={itemDetail} />} </>
-   
+  return <>{itemDetail && <ItemDetail item={itemDetail} />} </>   
   
 }
 

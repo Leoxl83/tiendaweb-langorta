@@ -3,11 +3,23 @@ import ItemCount from "../ItemCount/ItemCount";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ItemDetail = ({ item }) => {
 
   const { addToCart } = useContext(CartContext);
   const [count, setCount] = useState(1);
+  const notify = () =>
+    toast.success(` ${item.name} agregado al carrito!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const rutaImagen = '../images/';
 
@@ -30,8 +42,11 @@ const ItemDetail = ({ item }) => {
           <h2>{item.name}</h2>
           <h4>U$S {item.price}</h4>
           <ItemCount setCount={setCount} count={count} />
-          <button onClick={() => onAdd(item)}>Agregar al carrito</button>
+          <button onClick={() => { onAdd(item); notify() }}>Agregar al carrito</button>
           <Link to={'/cart'}> <button className="btnFinalizar" onClick={finalizar} >Finalizar mi compra</button></Link>
+
+          <ToastContainer/>
+               
         </section>
       </div>
     </div>

@@ -16,18 +16,16 @@ export const CartProvider = ({ children }) => {
         return cart.some((item) => item.id === id);
     };
 
+    const clear = () => {
+        setCart([]);
+    };
+
     const removeItem = (productId) => {
-        let nuevoArreglo = [];
-        cart.forEach(product => {
-            if (product.id !== productId) {
-                nuevoArreglo.push(product)
-            }
-        })
-        setCart(nuevoArreglo);
-    }
+        setCart(cart.filter((product) => product.id !== productId));
+    };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeItem }}>
+        <CartContext.Provider value={{ cart, addToCart, removeItem, clear }}>
             {children}
         </CartContext.Provider>
     );

@@ -8,20 +8,18 @@ const ItemList = ({ lista }) => {
     <div className='list'>
       {
         lista.map((item) => (
-          <Link key={item.id} to= {'/item/' + item.id}>
-            <div className='card' >
+            <div className='card'key={item.id}>
               <Item
                 image={item.image}
                 name={item.name}
                 price={item.price}
               />
-                <button> Ver Detalles </button>
-            </div>   
-          </Link>          
+              <Link to={'/item/' + item.id}> <button> Ver Detalles </button></Link>
+            </div>
         ))
       }
     </div>
-  );  
+  );
 }
 
 export default ItemList
