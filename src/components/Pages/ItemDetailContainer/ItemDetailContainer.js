@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from "../../ItemDetail/ItemDetail";
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
@@ -7,16 +7,21 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 const ItemDetailContainer = () => {
 
   const { id } = useParams();
-  const [itemDetail, setProductDetail] = useState();
+  const [itemDetail, setItemDetail] = useState([]);
 
-  const db = getFirestore();
+  useEffect(() => {
+    getItem();
+  },)
 
-  const queryDoc = doc(db, 'items', id);
-
-  getDoc(queryDoc).then((res) => {
-    setProductDetail({ id: res.id, ...res.data() });
+  const getItem = () => {
+    const db = getFirestore();
+    const queryDoc = doc(db, 'items', id);
+    getDoc(queryDoc).then((res) => {
+      setItemDetail({ id: res.id, ...res.data() });
     })
     .catch((err) => console.log(err));
+
+  }
   
   return <>{itemDetail && <ItemDetail item={itemDetail} />} </>   
   

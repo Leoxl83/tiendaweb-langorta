@@ -1,0 +1,23 @@
+.footer {
+    grid-row: 3;
+    background-color: rgb(193, 193, 193);
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    border-top: 3px solid black;
+    margin-top: 50px;
+}
+
+h5 {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.footer_icono {
+    width: 100px;
+    height: 30px;
+    color: black;
+}

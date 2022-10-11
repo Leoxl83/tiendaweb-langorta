@@ -36,7 +36,7 @@ const ItemDetail = ({ item }) => {
       <div className="cardDetail">
         <section className="cardDetailLeft">
           <img className="card_img" src={rutaImagen + item.image} alt={item.name} />
-          <Link to='/'>Volver</Link>
+          <Link to={"/"}><button>Volver</button></Link>
         </section>
         <section className="cardDetailRight">
           <h2>{item.name}</h2>

@@ -1,76 +1,154 @@
 import "./Cart.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import moment from "moment/moment";
-import { collection, addDoc, getFirestore} from 'firebase/firestore';
-
+import { collection, addDoc, getFirestore, updateDoc, doc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
 
 const Cart = () => {
-   const {cart, removeItem} = useContext(CartContext);
-   const createOrder = () =>{
-       const db = getFirestore();
-       const order = {
-           buyer: {
-                   name: "",
-                   phone: "",
-                   email: ""
-           },
-           items: cart,
-           total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
-           date: moment().format(),
-       };
-       const query = collection(db, "orders");
-       addDoc(query, order)
-       .then(({id}) => {
-           console.log(id);
-           alert ("Felicidades por tu compra")})
-       .catch(() => alert("Tu compra no pudo ser realizada, intentalo mas tarde"))
-       
-   }
+  const { cart, removeItem, clear, totalCartPrice } = useContext(CartContext);
+  const navigate = useNavigate();
 
-   console.log("cart", cart);
+  const [order, setOrder] = useState({
+    buyer: {
+      name: '',
+      phone: 0,
+      email: '',
+    },
+    items: cart,
+    total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+    date: moment().format('DD/MM/YYYY, h:mm:ss a'),
+  });
 
-   return (
-      <div className="carrito">
-         {cart.length === 0 ? (
-            <>
-               <h2>No hay productos en tu carrito</h2>
-               <Link to={"/"}>Volver</Link>
-            </>
-         ) : (
-            <div className="carritoContenido">
-               {cart.map((item) => (
-                  <div className="carritoCaja" key={item.id}>
-                     <>
-                        <section>
-                           <img src={item.image} alt={item.name} className="imgCarrito" />
-                           <h3>{item.name}</h3>
-                        </section>
-                        <section>
-                           <h4>Precio: </h4>
-                           <h5>U$S {item.price}</h5>
-                        </section>
-                        <section>
-                           <h4>Cantidad: </h4>
-                           <h5>{item.quantity}</h5>
-                        </section>
-                        <section>
-                           <h4>Total: </h4>
-                           <h5>U$S {item.price * item.quantity}</h5>
-                        </section>
-                        <button onClick={() => removeItem(item.id)}>Eliminar producto</button>
-                     </>
-                  </div>
-               ))}
+  const db = getFirestore();
+
+  const createOrder = () => {
+    const query = collection(db, "orders");
+    addDoc(query, order)
+      .then(({ id }) => {
+        console.log(id);
+        updateStockProducts();
+        Swal.fire({
+          icon: "success",
+          position: "center",
+          title: `Felicidades ${userName} por tu compra!
+                  Tu numero de rastreo es: ${id}`,
+          showConfirmButton: false,
+          timer: 3500
+        })      
+      })
+    .catch(() => alertaError())
+  }
+
+  const updateStockProducts = () => {
+    cart.forEach((item) => {
+      const queryUpdate = doc(db, 'items', item.id);
+      updateDoc(queryUpdate, {
+        categoryId: item.categoryId,
+        image: item.image,
+        price: item.price,
+        name: item.name,
+        stock: item.stock - item.quantity,
+      })
+        .then(() => {
+          if (cart[cart.length - 1].id === item.id) {
+            clear();
+            navigate('/');
+          }
+        })
+        .catch(() => {
+          console.log('error al actualizar stock');
+        });
+    });
+  };
+
+  let userName = order.buyer.name;
+
+  const alertaError = () => {
+    Swal.fire({
+      icon: "error",
+      position: "center",
+      title: "Tu compra no pudo ser realizada, intentalo mas tarde",
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
+
+  console.log("cart", cart);
+
+  const handleInputChange = (e) => {
+    console.log(e.target);
+    setOrder({
+      ...order,
+      buyer: {
+        ...order.buyer,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
+
+  return (
+    <div className="carrito">
+      {cart.length === 0 ? (
+        <>
+          <h2>No hay productos en tu carrito</h2>
+          <Link to={"/"}><button>Volver</button></Link>
+        </>
+      ) : (
+        <div className="carritoContenido">
+          {cart.map((item) => (
+            <div className="carritoCaja" key={item.id}>
+              <>
+                <section>
+                  <img src={item.image} alt={item.name} className="imgCarrito" />
+                  <h3>{item.name}</h3>
+                </section>
+                <section>
+                  <h4>Precio: </h4>
+                  <h5>U$S {item.price}</h5>
+                </section>
+                <section>
+                  <h4>Cantidad: </h4>
+                  <h5>{item.quantity}</h5>
+                </section>
+                <section>
+                  <h4>Total: </h4>
+                  <h5>U$S {item.price * item.quantity}</h5>
+                </section>
+                <button onClick={() => removeItem(item.id)}>Eliminar producto</button>
+              </>
             </div>
-         )}
-         <div>
-            <button onClick={createOrder}>Crear Orden</button>
-         </div>
-      </div>
-   )
-}
+          ))}
 
+          {totalCartPrice() > 0 ? <h3>Total: ${totalCartPrice()}</h3>: ""}
+
+          <div className="form">
+            <h2>Ingresa tus datos</h2>
+            <div>
+              <label>Nombre</label>
+              <input name="name" type="text" value={order.buyer.name} onChange={handleInputChange}/>
+            </div>
+            <br/>
+            <div>
+              <label>Correo</label>
+              <input name="email" type="email" value={order.buyer.email} onChange={handleInputChange}/>
+            </div>
+            <br/>
+            <div>
+              <label>Direccion</label>
+              <input name="address" type="text" value={order.buyer.address} onChange={handleInputChange}/>
+            </div> 
+            <div className="cajaBotones">
+              <Link to={"/"}><button>Volver</button></Link>
+              <button onClick={createOrder}>Crear Orden</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+
+}
 
 export default Cart

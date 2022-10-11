@@ -6,6 +6,7 @@
     align-items: center;
     min-height: 100vh;
     text-align: center;
+    margin-top: 40px;
 }
 
 .imgCarrito {
@@ -30,4 +31,11 @@
     gap: 20px;
     border-bottom: solid black 2px;
 
+}
+.form {
+    margin: 20px;
+    
+}
+.cajaBotones{
+    margin-top: 20px;
 }
