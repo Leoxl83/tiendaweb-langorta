@@ -19,6 +19,10 @@ const NavBar = () => {
           <NavLink to="/category/Taza" className="navbar-link" 
             style={({isActive}) => isActive ? {color: "rgb(184, 20, 20)", fontWeight:"bold"} : {color: "black"}}>Tazas</NavLink> 
         </li>
+        <li className="navbar-link">
+          <NavLink to="/category/T-shirt" className="navbar-link" 
+            style={({isActive}) => isActive ? {color: "rgb(184, 20, 20)", fontWeight:"bold"} : {color: "black"}}>T-Shirt</NavLink> 
+        </li>
       </ul>
       <NavLink to={"/cart"}>
         <CartWidget/>

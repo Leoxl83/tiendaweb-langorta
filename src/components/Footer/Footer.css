@@ -1,13 +1,13 @@
 .footer {
     grid-row: 3;
-    background-color: rgb(193, 193, 193);
+    background-color: rgb(231, 231, 231);
     display: flex;
     justify-content:center;
     align-items: center;
     height: 80px;
     width: 100%;
     border-top: 3px solid black;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 h5 {

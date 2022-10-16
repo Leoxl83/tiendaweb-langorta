@@ -5,26 +5,36 @@ import { getFirestore, getDocs, collection, query, where } from 'firebase/firest
 
 const ItemListContainer = () => {
 
-  const { category } = useParams();
-  const [itemList, setItemList] = useState([])
+  const [itemList, setItemList] = useState([]);
+  const {category} = useParams();
 
+  
+  const getItems = new Promise ((resolve, reject) => {
+    
+    const db = getFirestore();
+    const queryCollection = collection(db, 'items');
+
+    setTimeout(() => {
+        const queryCategory = category ? query(queryCollection,
+        where('categoryId', '==', category)) : queryCollection
+      
+        getDocs(queryCategory)
+        
+        .then((response) => {
+          const data = response.docs.map((product) => {
+            return {id: product.id, ...product.data()};
+          });
+          resolve(data);
+        });
+    }, 500);
+  }) 
+  
   useEffect(() => {
-    getItems();
-  });
-
-  const getItems = () => {
-
-    const db = getFirestore();    //inicio mi base de datos
-    const queryBase = collection(db, 'items');
-    const querySnapshot = category ? query(queryBase, where('categoryId', '==', category)) : queryBase;
-
-    getDocs(querySnapshot).then((response) => {
-      const data = response.docs.map((product) => {
-        return { id: product.id, ...product.data() };
-      });
-      setItemList(data);
-    });
-  };  
+      getItems
+      .then((response) => {
+        setItemList(response)
+      })
+  },); 
 
   return (
     <>

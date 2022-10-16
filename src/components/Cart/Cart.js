@@ -33,12 +33,18 @@ const Cart = () => {
           icon: "success",
           position: "center",
           title: `Felicidades ${userName} por tu compra!
-                  Tu numero de rastreo es: ${id}`,
+                  Tu codigo de rastreo es: ${id}`,
           showConfirmButton: false,
           timer: 3500
-        })      
+        })
       })
-    .catch(() => alertaError())
+      .catch(() => Swal.fire({
+        icon: "error",
+        position: "center",
+        title: "Tu compra no pudo ser realizada, intentalo mas tarde",
+        showConfirmButton: false,
+        timer: 2000
+      }))
   }
 
   const updateStockProducts = () => {
@@ -65,20 +71,9 @@ const Cart = () => {
 
   let userName = order.buyer.name;
 
-  const alertaError = () => {
-    Swal.fire({
-      icon: "error",
-      position: "center",
-      title: "Tu compra no pudo ser realizada, intentalo mas tarde",
-      showConfirmButton: false,
-      timer: 2000
-    })
-  }
-
   console.log("cart", cart);
 
   const handleInputChange = (e) => {
-    console.log(e.target);
     setOrder({
       ...order,
       buyer: {
@@ -93,7 +88,7 @@ const Cart = () => {
       {cart.length === 0 ? (
         <>
           <h2>No hay productos en tu carrito</h2>
-          <Link to={"/"}><button>Volver</button></Link>
+          <Link to={"/item"}><button>Volver</button></Link>
         </>
       ) : (
         <div className="carritoContenido">
@@ -121,24 +116,29 @@ const Cart = () => {
             </div>
           ))}
 
-          {totalCartPrice() > 0 ? <h3>Total: ${totalCartPrice()}</h3>: ""}
+          {totalCartPrice() > 0 ? <h3 className="totalText">Total: ${totalCartPrice()}</h3> : ""}
 
           <div className="form">
-            <h2>Ingresa tus datos</h2>
+            <h2>Ingresa tus datos para finalizar tu compra</h2>
             <div>
               <label>Nombre</label>
-              <input name="name" type="text" value={order.buyer.name} onChange={handleInputChange}/>
+              <input name="name" type="text" value={order.buyer.name} onChange={handleInputChange} />
             </div>
-            <br/>
+            <br />
             <div>
               <label>Correo</label>
-              <input name="email" type="email" value={order.buyer.email} onChange={handleInputChange}/>
+              <input name="email" type="email" value={order.buyer.email} onChange={handleInputChange} />
             </div>
-            <br/>
+            <br />
+            <div>
+              <label>Telefono</label>
+              <input name="phone" type="number" value={order.buyer.phone} onChange={handleInputChange} />
+            </div>
+            <br />
             <div>
               <label>Direccion</label>
-              <input name="address" type="text" value={order.buyer.address} onChange={handleInputChange}/>
-            </div> 
+              <input name="address" type="text" value={order.buyer.address} onChange={handleInputChange} />
+            </div>
             <div className="cajaBotones">
               <Link to={"/"}><button>Volver</button></Link>
               <button onClick={createOrder}>Crear Orden</button>
