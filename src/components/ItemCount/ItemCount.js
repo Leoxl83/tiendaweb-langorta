@@ -1,10 +1,16 @@
 import './ItemCount.css';
+import Swal from 'sweetalert2';
 
-const ItemCount = ({setCount, count}) => {
+const ItemCount = ({stock, setCount, count}) => {
 
-  const stock = 5;
-  const agregar = () => count < stock ? setCount(count +1) : alert("Alcanzo el maximo de productos");
-  const quitar = () => count > 1 ? setCount(count -1) : alert("Tenes el minimo de productos");
+  const agregar = () => count < stock ? setCount(count +1) : Swal.fire({
+    icon: 'error',
+    title: 'No hay mas stock disponible!',
+  })
+  const quitar = () => count > 1 ? setCount(count -1) : Swal.fire({
+    icon: 'error',
+    title: 'Debe seleccionar un producto!',
+  });
   return (
     <>
       <div>Stock {stock}</div>

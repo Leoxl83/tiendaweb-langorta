@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import moment from "moment/moment";
 import { collection, addDoc, getFirestore, updateDoc, doc } from 'firebase/firestore';
 import Swal from 'sweetalert2';
+import { BsTrash } from "react-icons/bs";
 
 const Cart = () => {
   const { cart, removeItem, clear, totalCartPrice } = useContext(CartContext);
@@ -13,7 +14,7 @@ const Cart = () => {
   const [order, setOrder] = useState({
     buyer: {
       name: '',
-      phone: 0,
+      phone: '',
       email: '',
     },
     items: cart,
@@ -43,7 +44,7 @@ const Cart = () => {
         position: "center",
         title: "Tu compra no pudo ser realizada, intentalo mas tarde",
         showConfirmButton: false,
-        timer: 2000
+        timer: 1500
       }))
   }
 
@@ -87,11 +88,11 @@ const Cart = () => {
     <div className="carrito">
       {cart.length === 0 ? (
         <>
-          <h2>No hay productos en tu carrito</h2>
-          <Link to={"/item"}><button>Volver</button></Link>
+          <h2>No hay productos en su carrito</h2>
         </>
       ) : (
         <div className="carritoContenido">
+          <h2>Detalle de su carrito</h2>
           {cart.map((item) => (
             <div className="carritoCaja" key={item.id}>
               <>
@@ -100,52 +101,36 @@ const Cart = () => {
                   <h3>{item.name}</h3>
                 </section>
                 <section>
-                  <h4>Precio: </h4>
+                  <h4>Precio </h4>
                   <h5>U$S {item.price}</h5>
                 </section>
                 <section>
-                  <h4>Cantidad: </h4>
+                  <h4>Cantidad </h4>
                   <h5>{item.quantity}</h5>
                 </section>
                 <section>
-                  <h4>Total: </h4>
+                  <h4>Sub-Total </h4>
                   <h5>U$S {item.price * item.quantity}</h5>
                 </section>
-                <button onClick={() => removeItem(item.id)}>Eliminar producto</button>
+                <BsTrash className="trashIcon" onClick={() => removeItem(item.id)}></BsTrash>
               </>
             </div>
           ))}
 
           {totalCartPrice() > 0 ? <h3 className="totalText">Total: ${totalCartPrice()}</h3> : ""}
 
-          <div className="form">
-            <h2>Ingresa tus datos para finalizar tu compra</h2>
-            <div>
-              <label>Nombre</label>
-              <input name="name" type="text" value={order.buyer.name} onChange={handleInputChange} />
-            </div>
-            <br />
-            <div>
-              <label>Correo</label>
-              <input name="email" type="email" value={order.buyer.email} onChange={handleInputChange} />
-            </div>
-            <br />
-            <div>
-              <label>Telefono</label>
-              <input name="phone" type="number" value={order.buyer.phone} onChange={handleInputChange} />
-            </div>
-            <br />
-            <div>
-              <label>Direccion</label>
-              <input name="address" type="text" value={order.buyer.address} onChange={handleInputChange} />
-            </div>
-            <div className="cajaBotones">
-              <Link to={"/"}><button>Volver</button></Link>
-              <button onClick={createOrder}>Crear Orden</button>
-            </div>
+          <div class="form">
+            <h2 className="tituloFin">Ingrese sus datos para finalizar la compra</h2>
+            <input class="inputs" type="name" name="name" placeholder="Nombre" value={order.buyer.name} onChange={handleInputChange} />
+            <input class="inputs" type="text" name="adress" placeholder="Direccion" value={order.buyer.address} onChange={handleInputChange} />
+            <input class="inputs" type="number" name="phone" placeholder="Telefono" value={order.buyer.phone} onChange={handleInputChange} />
+            <input class="inputs" type="email" name="email" placeholder="E-Mail" value={order.buyer.email} onChange={handleInputChange} />
+            <button className="btnOrden" onClick={createOrder}>Crear Orden</button>
           </div>
         </div>
       )}
+      <Link to={"/item"}><button>Volver a la tienda</button></Link>
+
     </div>
   )
 

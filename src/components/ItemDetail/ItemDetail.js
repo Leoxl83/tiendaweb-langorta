@@ -36,18 +36,16 @@ const ItemDetail = ({ item }) => {
       <div className="cardDetail">
         <section className="cardDetailLeft">
           <img className="card_img" src={rutaImagen + item.image} alt={item.name} />
-          <Link to={"/"}><button>Volver</button></Link>
+          <Link to={"/item"}><button>Volver</button></Link>
         </section>
         <section className="cardDetailRight">
           <h2>{item.name}</h2>
           <h4>U$S {item.price}</h4>
-          <ItemCount setCount={setCount} count={count} />
+          <ItemCount setCount={setCount} count={count} stock={item.stock} />
           <button onClick={() => { onAdd(item); notify() }}>Agregar al carrito</button>
           <Link to={'/cart'}> <button className="btnFinalizar" onClick={finalizar} >Finalizar mi compra</button></Link>
-
           <ToastContainer/>
-               
-        </section>
+          </section>
       </div>
     </div>
   )

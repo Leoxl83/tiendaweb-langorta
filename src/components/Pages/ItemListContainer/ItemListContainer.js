@@ -8,6 +8,7 @@ const ItemListContainer = () => {
   const [itemList, setItemList] = useState([]);
   const {category} = useParams();
 
+
   
   const getItems = new Promise ((resolve, reject) => {
     
@@ -35,6 +36,7 @@ const ItemListContainer = () => {
         setItemList(response)
       })
   },); 
+
 
   return (
     <>

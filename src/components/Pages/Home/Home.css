@@ -1,4 +1,40 @@
 .bannerProducts {
+    margin-top: 20px;
     text-align: center;
-    background-color: #fbd828;
+}
+
+.btnTienda {
+    transition: 0.5s all ease-in-out;
+}
+
+.btnTienda:hover {
+    transform: scale(1.1);
+}
+
+.bannerInfo {
+    display: flex;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background-color: #125c9c;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border-radius: 10px;
+}
+.delivery {
+    align-items: center;
+    text-align: center;
+}
+.atencion {
+    align-items: center;
+    text-align: center;
+}
+.bannerIcono {
+    width: 100px;
+    height: 65px;
+    color: rgb(0, 0, 0);
+    
+
 }
