@@ -7,6 +7,11 @@
 ### Autor
 >Leonardo Langorta
 
+## Navegabilidad
+
+<div>
+  <img src="./public/navegacion.gif" alt="navegacion">
+</div>
 
 ### Librerias
 | library                                                          | used                      |
